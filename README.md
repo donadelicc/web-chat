@@ -20,7 +20,7 @@ def askGPT(nettside, prompt):
         Du er en hjelpsom assisten som har som eneste oppgave å besvare alle mulige spørsmål som du blir spurt om
         angående en spesifikk nettside. Alt innhold på nettsiden finner du i denne teksten: """ + nettside + """
         Du skal kun svare på spørsmål som er relevant for nettsiden.
-        Alle andre spørsmål skal besvarer med denne setningen: "Nettsiden har ingen informasjon om dette". 
+        Alle andre spørsmål skal besvares med denne setningen: "Nettsiden har ingen informasjon om dette". 
          """
         },
             {"role": "user", "content": f"{prompt}"
@@ -33,6 +33,7 @@ def askGPT(nettside, prompt):
         temperature=0.1,
     )
     return response['choices'][0]['message']['content']
+
 ```
 
 --> tar inn en nettside og en prompt som parametere der nettsiden er strengen scrape_all_pages() metoden returnere og prompten er 
