@@ -46,8 +46,9 @@ en instruks som forteller modellen at den skal svare på det brukeren spør om b
 1. Klon prosjektet
  `git clone [link til repoet]`
 2. Installer avhengigheter
- `pip install -r requirements.txt`
-3. Kjør applikasjonen
+ Naviger til roten av prosjektet ditt å kjør denne kommandoen:
+`pip install -r requirements.txt`
+4. Kjør applikasjonen
 `flask run`
 
 
