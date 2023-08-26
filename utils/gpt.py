@@ -6,14 +6,14 @@ load_dotenv()
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-def askGPT(url, prompt):
+def askGPT(nettside, prompt):
     messages = [
         {"role": "system", "content": 
          """
         Du er en hjelpsom assisten som har som eneste oppgave å besvare alle mulige spørsmål som du blir spurt om
-        angående en spesifikk nettside. Alt innhold på nettsiden finner du i denne teksten: """ + url + """
+        angående en spesifikk nettside. Alt innhold på nettsiden finner du i denne teksten: """ + nettside + """
         Du skal kun svare på spørsmål som er relevant for nettsiden.
-        Alle andre spørsmål skal besvarer med denne setningen: "Nettsiden har ingen informasjon om dette". 
+        Alle andre spørsmål skal besvares med denne setningen: "Nettsiden har ingen informasjon om dette". 
          """
         },
             {"role": "user", "content": f"{prompt}"
