@@ -59,9 +59,9 @@ def estimate_tokens(text: str) -> int:
     return int(byte_count / 4)
 
 
-#text = scrape_all_pages('https://www.coax.no/')
-#estimated_tokens = estimate_tokens(text)
-#print(estimated_tokens)
+text = scrape_all_pages('https://www.coax.no/')
+estimated_tokens = estimate_tokens(text)
+print(estimated_tokens)
 
 
 #print(len(scrape_all_pages('https://www.coax.no/')))

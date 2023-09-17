@@ -32,8 +32,8 @@ def ask_chain_and_print(question):
     print(response)
 
 # Start samtalen
-#ask_chain_and_print("Hei, mitt navn er Preben")
-#ask_chain_and_print("Hva er 1+1?")
-#ask_chain_and_print("Hva heter jeg?")
+ask_chain_and_print("Hei, mitt navn er Preben")
+ask_chain_and_print("Hva er 1+1?")
+ask_chain_and_print("Hva heter jeg?")
 
-print(dir(conversation))
+#print(dir(conversation))
