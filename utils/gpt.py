@@ -26,3 +26,5 @@ def askGPT(nettside, prompt):
         temperature=0.1,
     )
     return response['choices'][0]['message']['content']
+
+
