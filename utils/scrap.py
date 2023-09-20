@@ -58,12 +58,12 @@ def estimate_tokens(text: str) -> int:
     byte_count = len(text.encode('utf-8'))
     return int(byte_count / 4)
 
-
+'''
 text = scrape_all_pages('https://www.coax.no/')
 estimated_tokens = estimate_tokens(text)
 print(estimated_tokens)
 
-
+'''
 #print(len(scrape_all_pages('https://www.coax.no/')))
 #print(len(scrape_all_pages('https://www.coax.no/').split()))
 
