@@ -11,8 +11,6 @@ from response import get_response
 ## denne burde lastes opp til en database, og ikke lagres lokalt
 VectorStoreFile = "COAX_web_content.pkl"
 
-
-
 with st.sidebar:
     st.title("COAX AS Chatbot")
     st.markdown('''

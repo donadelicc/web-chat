@@ -1,4 +1,3 @@
-opnenai
 python-dotenv
 requests
 beautifulsoup4
