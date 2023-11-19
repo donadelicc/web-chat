@@ -1,5 +1,0 @@
-flask
-python-dotenv
-openai
-BeautifulSoup4
-langchain
