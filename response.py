@@ -17,7 +17,11 @@ from langchain.chat_models import ChatOpenAI
 ## Laster inn vektordatabasen en gang til minnet
 @lru_cache(maxsize=None)  # 'None' --> ubegrenset cache-størrelse
 def get_vector_store(filename):
-    return pickle.load(open(filename, "rb"))
+    if os.path.exists(filename):
+        return pickle.load(open(filename, "rb"))
+    else:
+        raise FileNotFoundError(f"Filen '{filename}' ble ikke funnet.")
+
 
 
 

@@ -18,3 +18,9 @@ ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
 2023-11-20 01:47:42,664:INFO:Successfully loaded faiss.
 2023-11-20 01:52:08,508:INFO:NumExpr defaulting to 8 threads.
 2023-11-20 01:52:50,165:INFO:NumExpr defaulting to 8 threads.
+2023-11-20 03:06:04,506:WARNING:Retrying langchain.chat_models.openai.ChatOpenAI.completion_with_retry.<locals>._completion_with_retry in 4.0 seconds as it raised Timeout: Request timed out: HTTPSConnectionPool(host='api.openai.com', port=443): Read timed out. (read timeout=600).
+2023-11-20 13:02:41,970:INFO:Loading faiss with AVX2 support.
+2023-11-20 13:02:41,986:INFO:Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2023-11-20 13:02:41,986:INFO:Loading faiss.
+2023-11-20 13:02:42,346:INFO:Successfully loaded faiss.
