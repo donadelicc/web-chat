@@ -6,3 +6,5 @@ openai
 azure-storage-blob
 tiktoken
 faiss-cpu
+pickle
+os
