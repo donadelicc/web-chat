@@ -1,8 +1,6 @@
 import streamlit as st
 from dotenv import load_dotenv
 
-from web_scrape import fetch_website_content, get_internal_links, scrape_all_pages
-from web_content import embedd_text
 from response import get_response
 
 # Allerede gjort skrapingen
@@ -35,10 +33,14 @@ def main():
     ## chattbot interface
 
     if st.button("Ask"):
-        response = get_response(question, VectorStoreFile)
+        response, callback_info = get_response(question, VectorStoreFile)
 
         st.text_area("A", response, height=100)
 
+        total_cost_NOK = callback_info.total_cost * 10.81
+        st.write("Total kostnad: "+str(total_cost_NOK)+" NOK")
+        st.write("Antall tokens brukt: "+str(callback_info.total_tokens))
+        
 
 if __name__ == '__main__':
     main()
