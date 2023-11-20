@@ -6,3 +6,4 @@ openai
 azure-storage-blob
 tiktoken
 faiss-cpu
+google-cloud-storage
