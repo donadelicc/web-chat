@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from azure.storage.blob import BlobServiceClient, BlobClient
+from google.cloud import storage
 import pickle
 from io import BytesIO
 
@@ -12,6 +12,25 @@ from langchain.embeddings.openai import OpenAIEmbeddings
 from langchain.vectorstores import FAISS
 
 
+def upload_to_gcs(data, bucket_name, blob_name):
+    key_file = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+    if key_file is None:
+        raise Exception("Google Cloud-nøkkelfilen er ikke definert i miljøvariablene")
+    
+    # Autentiser ved hjelp av nøkkelfilen
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] =  key_file
+
+    # Opprett en klient
+    storage_client = storage.Client()
+
+    # Få tak i bøtta
+    bucket = storage_client.bucket(bucket_name)
+
+    # Opprett en blob og last opp dataen
+    blob = bucket.blob(blob_name)
+    blob.upload_from_string(data, content_type='application/octet-stream')
+
+
 def embedd_and_store_text(text):
 
     load_dotenv()
@@ -21,7 +40,6 @@ def embedd_and_store_text(text):
     chunk_overlap=200,
     length_function=len
     )
-    
 
     ## teksten burde kanskje formateres og forbedres før den blir sendt til en VectorStore
     chunks = text_splitter.split_text(text)
@@ -29,27 +47,13 @@ def embedd_and_store_text(text):
     embeddings = OpenAIEmbeddings()
     VectorStore = FAISS.from_texts(chunks, embedding=embeddings)
 
-    # Ekstraher nødvendige data fra VectorStore
-    vectors = VectorStore.get_vectors()   
-    metadata = VectorStore.get_metadata() 
+    pkl_bytes = VectorStore.serialize_to_bytes()  # Serialiserer FAISS-indeksen
 
-    # Konverter VectorStore til en BytesIO-objekt
-    
-    pkl_bytes = BytesIO()
-    pickle.dump({"vectors": vectors, "metadata": metadata}, pkl_bytes)
-    pkl_bytes.seek(0)
+    bucket_name = 'chatty1'  # Erstatt med ditt bøttenavn
+    blob_name = 'COAX_web_content.pkl'
 
-    # Azure Blob Storage-tilkoblingsdetaljer
-    connect_str = os.getenv("AZURE_COAX_CONNECTION_STRING")
-    container_name = os.getenv("AZURE_COAX_CONTAINER_NAME")
-    blob_name = "COAX_web_content.pkl"
-
-    # Opprett en BlobServiceClient
-    blob_service_client = BlobServiceClient.from_connection_string(connect_str)
-
-    # Laste opp til Azure Blob Storage
-    blob_client = blob_service_client.get_blob_client(container=container_name, blob=blob_name)
-    blob_client.upload_blob(pkl_bytes, blob_type="BlockBlob", overwrite=True)
+    # Laste opp til Google Cloud Storage
+    upload_to_gcs(pkl_bytes, bucket_name, blob_name)
 
 
 text = scrape_all_pages("https://www.coax.no/") ## få GPT til å lage en ny og mer sammenhengende tekst?

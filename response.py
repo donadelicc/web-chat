@@ -14,14 +14,12 @@ from langchain.callbacks import get_openai_callback
 from langchain.chat_models import ChatOpenAI
 
 
-## Laster inn vektordatabasen en gang til minnet
-@lru_cache(maxsize=None)  # 'None' --> ubegrenset cache-størrelse
-def get_vector_store(filename):
-    if os.path.exists(filename):
-        return pickle.load(open(filename, "rb"))
-    else:
-        raise FileNotFoundError(f"Filen '{filename}' ble ikke funnet.")
+from get_vectorestore import download_from_gcs
 
+@lru_cache(maxsize=None)
+def get_vector_store(bucket_name, blob_name, local_file_name):
+    # Last ned og returner VectorStore-objektet
+    return download_from_gcs(bucket_name, blob_name, local_file_name)
 
 
 
@@ -38,12 +36,16 @@ intruction = """
     Svar på følgende spørsmål:
     """
 
-def get_response(query, VectorStoreFile):
+def get_response(query):
 
     load_dotenv()
 
+
+    # Last ned vektordatabasen ved oppstart
+    VectorStore = download_from_gcs()
+
     ## Laster inn vektordatabasen fra minnet i stedet for å laste den inn fra fil på disk
-    VectorStore = get_vector_store(VectorStoreFile)
+    #VectorStore = get_vector_store(bucket_name, blob_name, local_file_name)
     
     ## Søker i vektordatabasen etter de 3 mest relevante dokumentene som matcher spørringen
     docs = VectorStore.similarity_search(query, k=3) ## k kan endres for å få flere eller færre dokumenter

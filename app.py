@@ -3,11 +3,8 @@ from dotenv import load_dotenv
 
 from response import get_response
 
-# Allerede gjort skrapingen
-    ##text = scrape_all_pages("https://www.coax.no/")
+from get_vectorestore import download_from_gcs
 
-## denne burde lastes opp til en database, og ikke lagres lokalt
-VectorStoreFile = "COAX_web_content.pkl"
 
 with st.sidebar:
     st.title("COAX AS Chatbot")
@@ -21,6 +18,7 @@ with st.sidebar:
 
 def main():
     load_dotenv()
+
 
     st.title("COAX AS Chatbot")
 
@@ -73,7 +71,7 @@ def main():
     with col2:
         if st.button("Send"):
             user_question = user_input
-            response, callback_info = get_response(user_question, VectorStoreFile)
+            response, callback_info = get_response(user_question)
 
             st.session_state.history.append(("👤 You:", user_question))
             st.session_state.history.append(("🤖 COAX AI:", response))
