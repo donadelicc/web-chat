@@ -1,0 +1,20 @@
+2023-11-20 01:36:32,368:INFO:NumExpr defaulting to 8 threads.
+2023-11-20 01:36:33,241:INFO:Loading faiss with AVX2 support.
+2023-11-20 01:36:33,242:INFO:Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2023-11-20 01:36:33,242:INFO:Loading faiss.
+2023-11-20 01:36:33,259:INFO:Successfully loaded faiss.
+2023-11-20 01:47:20,070:INFO:NumExpr defaulting to 8 threads.
+2023-11-20 01:47:20,998:INFO:Loading faiss with AVX2 support.
+2023-11-20 01:47:20,999:INFO:Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2023-11-20 01:47:21,000:INFO:Loading faiss.
+2023-11-20 01:47:21,022:INFO:Successfully loaded faiss.
+2023-11-20 01:47:41,740:INFO:NumExpr defaulting to 8 threads.
+2023-11-20 01:47:42,647:INFO:Loading faiss with AVX2 support.
+2023-11-20 01:47:42,647:INFO:Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2023-11-20 01:47:42,647:INFO:Loading faiss.
+2023-11-20 01:47:42,664:INFO:Successfully loaded faiss.
+2023-11-20 01:52:08,508:INFO:NumExpr defaulting to 8 threads.
+2023-11-20 01:52:50,165:INFO:NumExpr defaulting to 8 threads.
